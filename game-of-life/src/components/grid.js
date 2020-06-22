@@ -19,20 +19,24 @@ const operations =[
     [-1, 0],
 ]
 
+const generateEmptyGrid = ()=>{
+    const gridRows = []; //rows set to an empty array
+
+    //for loop where i=0 means cell is dead and i= 1 is alive
+    //want to initialize an array of zeros. Have callback function return 0 
+    for (let i = 0; i < numberOfRows; i++) {
+        gridRows.push(Array.from(Array(numberOfCols), () => 0))
+    }
+    //Array.from method takes in two parameters: 
+    //length of the array and a mapping function that returns the value and a key
+    return gridRows;
+}
 
 function Grid() {
     //initial state for grid
     const [grid, setGrid] = useState(() => {
         const gridRows = []; //rows set to an empty array
-
-        //for loop where i=0 means cell is dead and i= 1 is alive
-        //want to initialize an array of zeros. Have callback function return 0 
-        for (let i = 0; i < numberOfRows; i++) {
-            gridRows.push(Array.from(Array(numberOfCols), () => 0))
-        }
-        //Array.from method takes in two parameters: 
-        //length of the array and a mapping function that returns the value and a key
-        return gridRows;
+        return generateEmptyGrid();
     })
     // console.log(grid)
 
@@ -89,6 +93,24 @@ function Grid() {
             }
         }}>
             {running ? 'stop': 'start'} 
+            </button >
+
+        {/* Clear button */}
+            <button onClick ={()=>{
+                setGrid(generateEmptyGrid())
+            }}>Clear
+
+            </button>
+
+            {/* Random button */}
+            <button onClick ={()=>{
+                 const gridRows = []; 
+                 for (let i = 0; i < numberOfRows; i++) {                           
+                     gridRows.push(Array.from(Array(numberOfCols), () => (Math.random() > 0.7 ? 1: 0))) //if current grid value is greater than 0.7 gets a 1(alive) else less than 0.7 gets 0 (dead)
+                 }        
+                 setGrid(gridRows); //initial state of setGrid now updated with gridRows array after it has pushed (added new item to end of array)  the updated values from the random number of columns
+            }}>Random
+
             </button>
 
         <div style={{
