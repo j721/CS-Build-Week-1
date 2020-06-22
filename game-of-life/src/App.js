@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
-function App() {
+function App () {
   return (
+
     <div className="App">
       <header className="App-header">
-        <div>
           <h1>Welcome to Conway's Game of Life</h1>
-        </div>
       </header>
     </div>
+
   );
 }
 
