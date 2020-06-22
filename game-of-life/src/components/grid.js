@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 
 const rows = 40;
-cons cols = 60; 
+const cols = 60; 
 
 
 function Grid(){

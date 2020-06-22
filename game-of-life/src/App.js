@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
+import Grid from "./components/grid";
 
 function App () {
   return (
