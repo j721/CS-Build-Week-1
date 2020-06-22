@@ -25,16 +25,20 @@ function Grid(){
 
 
     return (
-        <>          
-        {grid.map((rows, i)=>rows.map((col, j) =>
+        <div style ={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${cols}, 20px)`        //CSS grid styling 
+        }}>     
+     {/*map through rows and col to display grid  */}
+        {grid.map((rows, i)=>rows.map((cols, j) =>
             <div 
-            key ={`${i}-${j}`} //unique key defined with index of i(rows) and j (col)
+            key ={`${i}-${j}`} //unique key defined with index of i(rows) and j (col) for each individual cell 
             style ={{width: 20,                       
             height: 20, backgroundColor: grid [i][j] ? 'pink' : undefined, //if alive pink, else undefined
             border: 'solid 1px black' }}>
 
             </div>))}
-        </>
+        </div>
     )
 }
 
