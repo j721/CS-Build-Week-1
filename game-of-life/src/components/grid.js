@@ -1,10 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import produce from 'immer';
 
 
 const numberOfRows = 40;
 const numberOfCols = 60;
+
+//column doesn't change, but the row does
+//tells location of neighboring cells
+const operations =[
+    [0, 1],
+    [0, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+    [-1, -1],
+    [1, 0],
+    [-1, 0],
+]
 
 
 function Grid() {
@@ -23,15 +36,57 @@ function Grid() {
     })
     // console.log(grid)
 
-    //initial state for running
+    //initial state for running set to false to not run
     const [running, setRunning] = useState(false);
 
+    //useRef hook creates an updated version of current running state
+    const runningRef = useRef();
+    runningRef.current = running
+
+    //useCallback hook to not have to create this function more than once    
+    //recursion 
+    const runSimulation =useCallback(()=>{
+        if (!runningRef.current){
+            return;
+        }
+        //update value in the grid and mutate them
+        setGrid((g)=>{
+            return produce(g, gridCopy=>{
+                for(let i = 0; i <numberOfRows; i++){
+                    for (let k = 0; k < numberOfCols; k++){ 
+                        //compute number of neighbors around cell
+                        let neighbors = 0; 
+                        operations.forEach(([x,y])=>{
+                            const newI = i +x;
+                            const newK = k +y;
+                            //checking the bounds of grid
+                            if(newI >= 0  && newI < numberOfRows && newK >=0 && newK < numberOfCols){
+                                neighbors +=g[newI][newK] //add 1 to current live cell
+                            }
+                        })
+                        // grid copy will die according to rules
+                        if(neighbors < 2 || neighbors > 3){
+                            gridCopy[i][k] = 0; 
+                        //grid copy will be alive according to rules 
+                        }else if (g[i][k] === 0 && neighbors === 3){
+                            gridCopy[i][k] = 1; 
+                        }
+                    }
+                }
+            })
+        })
+        setTimeout(runSimulation, 100) //run again in 100 milliseconds
+    },[])
 
     return (
         <>
         {/* button to toggle between start and stop state */}
         <button onClick ={()=>{
             setRunning(!running);
+            if(!running){
+                runningRef.current = true; 
+                runSimulation()
+            }
         }}>
             {running ? 'stop': 'start'} 
             </button>
