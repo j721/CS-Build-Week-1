@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import produce from 'immer';
 
 
 const numberOfRows = 40;
@@ -33,7 +34,10 @@ function Grid(){
         {grid.map((rows, i)=>rows.map((cols, j) =>
             <div 
             onClick ={()=>{
-                
+                const newGrid = produce(grid, gridCopy =>{
+                    gridCopy [i][j] = 1;
+                })
+                setGrid(newGrid)   
             }}
             key ={`${i}-${j}`} //unique key defined with index of i(rows) and j (cols) for each individual cell 
             style ={{width: 20,                       
