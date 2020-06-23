@@ -117,10 +117,10 @@ function Grid() {
             </button>
 
             <button onClick ={()=>{
-                setTimeout(runSimulation(), 30000)
-            }}>Slow</button>
+                setTimeout(runSimulation(), 90000)
+            }}>Fast</button>
 
-            {/* <button>Fast</button> */}
+            {/* <button>Slow</button> */}
 
         <div style={{
             display: 'grid',
