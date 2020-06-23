@@ -19,8 +19,10 @@ const operations =[
     [-1, 0],
 ]
 
+
 const generateEmptyGrid = ()=>{
     const gridRows = []; //rows set to an empty array
+    const generations = 0; 
 
     //for loop where i=0 means cell is dead and i= 1 is alive
     //want to initialize an array of zeros. Have callback function return 0 
@@ -36,7 +38,7 @@ function Grid() {
     //initial state for grid
     const [grid, setGrid] = useState(() => {
         const gridRows = []; //rows set to an empty array
-        return generateEmptyGrid();
+        return generateEmptyGrid(); 
     })
     // console.log(grid)
 
@@ -106,7 +108,8 @@ function Grid() {
             <button onClick ={()=>{
                  const gridRows = []; 
                  for (let i = 0; i < numberOfRows; i++) {                           
-                     gridRows.push(Array.from(Array(numberOfCols), () => (Math.random() > 0.7 ? 1: 0))) //if current grid value is greater than 0.7 gets a 1(alive) else less than 0.7 gets 0 (dead)
+                     gridRows.push(Array.from(Array(numberOfCols), () => (Math.random() > 0.7 ? 1: 0)))
+                 //if current grid value is greater than 0.7 gets a 1(alive) else less than 0.7 gets 0 (dead)
                  }        
                  setGrid(gridRows); //initial state of setGrid now updated with gridRows array after it has pushed (added new item to end of array)  the updated values from the random number of columns
             }}>Random
@@ -131,10 +134,11 @@ function Grid() {
                     key={`${i}-${j}`} //unique key defined with index of i(rows) and j (cols) for each individual cell 
                     style={{
                         width: 20,
-                        height: 20, backgroundColor: grid[i][j] ? 'yellow' : undefined, //if alive pink, else undefined
+                        height: 20, backgroundColor: grid[i][j] ? 'yellow' : undefined, //if alive yellow, else undefined
                         border: 'solid 1px black'
                     }}>
                 </div>))}
+                <h2>Generations</h2>
         </div>
         </>
     )
