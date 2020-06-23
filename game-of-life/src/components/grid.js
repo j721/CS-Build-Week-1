@@ -117,7 +117,7 @@ function Grid() {
             </button>
 
             <button onClick ={()=>{
-                setTimeout(runSimulation(), 90000)
+                setTimeout(runSimulation(), 900)
             }}>Fast</button>
 
             {/* <button>Slow</button> */}
