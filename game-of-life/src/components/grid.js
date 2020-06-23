@@ -116,6 +116,12 @@ function Grid() {
 
             </button>
 
+            <button onClick ={()=>{
+                setTimeout(runSimulation(), 30000)
+            }}>Slow</button>
+
+            {/* <button>Fast</button> */}
+
         <div style={{
             display: 'grid',
             gridTemplateColumns: `repeat(${numberOfCols}, 20px)`   //CSS grid styling 
@@ -138,7 +144,7 @@ function Grid() {
                         border: 'solid 1px black'
                     }}>
                 </div>))}
-                <h2>Generations</h2>
+              
         </div>
         </>
     )
