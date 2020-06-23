@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import produce from 'immer';
 
@@ -22,7 +22,6 @@ const operations =[
 
 const generateEmptyGrid = ()=>{
     const gridRows = []; //rows set to an empty array
-    const generations = 0; 
 
     //for loop where i=0 means cell is dead and i= 1 is alive
     //want to initialize an array of zeros. Have callback function return 0 
@@ -84,8 +83,15 @@ function Grid() {
         setTimeout(runSimulation, 100) //run again in 100 milliseconds
     },[])
 
+    const history = useHistory();
+
     return (
         <>
+        <button className ="home"
+        onClick={()=>{
+            history.push("/")
+        }}
+        >Home</button>
         {/* button to toggle between start and stop state */}
         <button onClick ={()=>{
             setRunning(!running);
@@ -120,8 +126,6 @@ function Grid() {
                 setTimeout(runSimulation(), 1)
             }}>Fast</button>
 
-            {/* <button>Slow</button> */}
-
         <div style={{
             display: 'grid',
             gridTemplateColumns: `repeat(${numberOfCols}, 20px)`   //CSS grid styling 
@@ -144,6 +148,27 @@ function Grid() {
                         border: 'solid 1px black'
                     }}>
                 </div>))}
+                
+                <div className="container">
+                <div className ="rules">
+                    <h1>Rules of the Game</h1>
+                    <p>A live cell with fewer than 2 live neighbors dies.
+                        A live cell with 2 or 3 live neighbors stays alive.
+                        A live cell with more than 3 live neighbors dies.
+                        A dead cell with exactly 3 live neighbors comes alive.
+                    </p>
+                    {/* <ul>
+                    <li>a live cell with fewer than 2 live neighbors dies</li>
+                    <li>a live cell with 2 or 3 live neighbors stays alive</li>
+                    <li>a live cell with more than 3 live neighbors dies</li>
+                    <li>a dead cell with exactly 3 live neighbors comes alive</li>
+                    </ul> */}
+                </div>
+                    <div className="about">
+                    <h1>Conway's Game of Life Algorithm</h1>
+                        <p>The game is based on cellular automaton,a grid of cells that can either have the state of being dead or alive.</p>
+                    </div>
+                </div>
               
         </div>
         </>
