@@ -12,24 +12,19 @@
   color: white;
 }
 
-/* .rules{
-  display: flex;
-  flex-direction: row;
-} */
+
 
 .about{
   margin-left: 23vh;
 } 
 
 .container{
-  display:flex;
-  justify-content: center;
-  margin-left: 50vh;
+  display: flex;
+  background: #292d35;
+  color: white;
+  flex-direction: column;
 }
+  
 
 
 
-/* button{
-  display:flex;
-  flex-direction: row;
-} */

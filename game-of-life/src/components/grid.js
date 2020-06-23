@@ -148,28 +148,6 @@ function Grid() {
                         border: 'solid 1px black'
                     }}>
                 </div>))}
-                
-                <div className="container">
-                <div className ="rules">
-                    <h1>Rules of the Game</h1>
-                    <p>A live cell with fewer than 2 live neighbors dies.
-                        A live cell with 2 or 3 live neighbors stays alive.
-                        A live cell with more than 3 live neighbors dies.
-                        A dead cell with exactly 3 live neighbors comes alive.
-                    </p>
-                    {/* <ul>
-                    <li>a live cell with fewer than 2 live neighbors dies</li>
-                    <li>a live cell with 2 or 3 live neighbors stays alive</li>
-                    <li>a live cell with more than 3 live neighbors dies</li>
-                    <li>a dead cell with exactly 3 live neighbors comes alive</li>
-                    </ul> */}
-                </div>
-                    <div className="about">
-                    <h1>Conway's Game of Life Algorithm</h1>
-                        <p>The game is based on cellular automaton,a grid of cells that can either have the state of being dead or alive.</p>
-                    </div>
-                </div>
-              
         </div>
         </>
     )
