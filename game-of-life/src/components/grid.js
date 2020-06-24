@@ -3,6 +3,8 @@ import React, { useState, useCallback, useRef } from "react";
 import produce from 'immer';
 
 
+
+
 const numberOfRows = 40;
 const numberOfCols = 60;
 
@@ -45,20 +47,6 @@ function Grid() {
     // console.log(grid)
 
 
-    const [boxGrid, setBoxGrid] = useState(Array(numberOfRows).fill().map(()=>Array(numberOfCols).fill(false)))
-
-    const seed=()=>{
-        let gridCopy = JSON.parse(JSON.stringify(boxGrid))
-        gridCopy = Array(numberOfRows).fill().map(()=>Array(numberOfCols).fill(false))
-            for(let i = 0; i< numberOfRows; i++){
-                for(let j =0; j <numberOfCols; j++){
-                    if(Math.floor(Math.random()*4)===1){
-                        gridCopy[i][j] = true; 
-                    }
-                }
-            }
-        setBoxGrid(gridCopy)    
-    }
 
     //initial state for generations
     const [generations, setGenerations] = useState(0);
@@ -169,10 +157,13 @@ function Grid() {
                 <div
 
                     onClick={() => {    //produce from immer library makes a change to grid state but maintains immutability, and creates a copy of grid
-                        const newGrid = produce(grid, gridCopy => {
-                            gridCopy[i][j] = grid[i][j] ? 0 : 1; //switch between states. if cell currently alive make it dead
-                        })
-                        setGrid(newGrid)
+                        if(!running){  
+                            //makes cells not clickable while running         
+                            const newGrid = produce(grid, gridCopy => {
+                                gridCopy[i][j] = grid[i][j] ? 0 : 1; //switch between states. if cell currently alive make it dead
+                            })
+                            setGrid(newGrid)
+                        }
                     }}
 
                     key={`${i}-${j}`} //unique key defined with index of i(rows) and j (cols) for each individual cell 
