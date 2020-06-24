@@ -61,7 +61,7 @@ function Grid() {
             return;
         }
 
-        //setup Generations
+        //seGenerations to iterate over item and increment by count +1
         setGenerations((genCount)=>{
             return (genCount = genCount + 1)
         })
@@ -104,6 +104,7 @@ function Grid() {
             history.push("/")
         }}
         >Home</button> */}
+        
         {/* button to toggle between start and stop state */}
         <button onClick ={()=>{
             setRunning(!running);
@@ -118,6 +119,7 @@ function Grid() {
         {/* Clear button */}
             <button onClick ={()=>{
                 setGrid(generateEmptyGrid())
+                setGenerations(0)
             }}>Clear
 
             </button>
@@ -137,6 +139,8 @@ function Grid() {
             <button onClick ={()=>{
                 setTimeout(runSimulation(), 1)
             }}>Fast</button>
+
+        <span>Number of Generations: {generations}</span>
 
         <div style={{
             display: 'grid',
