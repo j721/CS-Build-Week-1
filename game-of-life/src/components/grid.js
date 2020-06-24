@@ -95,15 +95,11 @@ function Grid() {
         setTimeout(runSimulation, 100) //run again in 100 milliseconds
     },[])
 
-    // const history = useHistory();
+
 
     return (
         <>
-        {/* <button className ="home"
-        onClick={()=>{
-            history.push("/")
-        }}
-        >Home</button> */}
+        
         
         {/* button to toggle between start and stop state */}
         <button onClick ={()=>{
