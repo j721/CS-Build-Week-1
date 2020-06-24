@@ -44,6 +44,22 @@ function Grid() {
     })
     // console.log(grid)
 
+
+    const [boxGrid, setBoxGrid] = useState(Array(numberOfRows).fill().map(()=>Array(numberOfCols).fill(false)))
+
+    const seed=()=>{
+        let gridCopy = JSON.parse(JSON.stringify(boxGrid))
+        gridCopy = Array(numberOfRows).fill().map(()=>Array(numberOfCols).fill(false))
+            for(let i = 0; i< numberOfRows; i++){
+                for(let j =0; j <numberOfCols; j++){
+                    if(Math.floor(Math.random()*4)===1){
+                        gridCopy[i][j] = true; 
+                    }
+                }
+            }
+        setBoxGrid(gridCopy)    
+    }
+
     //initial state for generations
     const [generations, setGenerations] = useState(0);
     
