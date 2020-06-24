@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import produce from 'immer';
 
 
@@ -41,9 +41,15 @@ function Grid() {
     })
     // console.log(grid)
 
+    //initial state for generations
+    const [generations, setGenerations] = useState(0);
+    
+    //generation useRef hook to update to current
+    const genRef = useRef();
+    genRef.current = generations; 
+    
     //initial state for running set to false to not run
     const [running, setRunning] = useState(false);
-
     //useRef hook creates an updated version of current running state
     const runningRef = useRef();
     runningRef.current = running
@@ -54,6 +60,12 @@ function Grid() {
         if (!runningRef.current){
             return;
         }
+
+        //setup Generations
+        setGenerations((genCount)=>{
+            return (genCount = genCount + 1)
+        })
+
         //update value in the grid and mutate them
         setGrid((g)=>{
             return produce(g, gridCopy=>{
@@ -83,15 +95,15 @@ function Grid() {
         setTimeout(runSimulation, 100) //run again in 100 milliseconds
     },[])
 
-    const history = useHistory();
+    // const history = useHistory();
 
     return (
         <>
-        <button className ="home"
+        {/* <button className ="home"
         onClick={()=>{
             history.push("/")
         }}
-        >Home</button>
+        >Home</button> */}
         {/* button to toggle between start and stop state */}
         <button onClick ={()=>{
             setRunning(!running);
