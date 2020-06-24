@@ -20,6 +20,7 @@ const operations =[
 ]
 
 
+
 const generateEmptyGrid = ()=>{
     const gridRows = []; //rows set to an empty array
 
@@ -34,6 +35,8 @@ const generateEmptyGrid = ()=>{
 }
 
 function Grid() {
+    const [speed, setSpeed] = useState(0);
+
     //initial state for grid
     const [grid, setGrid] = useState(() => {
         const gridRows = []; //rows set to an empty array
@@ -92,7 +95,7 @@ function Grid() {
                 }
             })
         })
-        setTimeout(runSimulation, 100) //run again in 100 milliseconds
+        setTimeout(runSimulation, 1500) //run again in 100 milliseconds
     },[])
 
 
@@ -133,8 +136,11 @@ function Grid() {
             </button>
 
             <button onClick ={()=>{
-                setTimeout(runSimulation(), 1)
+                // setSpeed(3)
+                setTimeout(runSimulation(), 1) //the rate  of generations is increasing
             }}>Fast</button>
+        
+
 
         <span>Number of Generations: {generations}</span>
 
