@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  display:flex;
 }
 
 
@@ -11,13 +12,11 @@
 }
 
 .cells{
-  margin-left: 41vh;
+  margin-left: 13vh;
+  margin-right: 7vh;
   margin-top: 6vh;
 }
 
-.about{
-  margin-left: 23vh;
-} 
 
 .container{
   display: flex;
@@ -25,7 +24,10 @@
   color: white;
   flex-direction: column;
 }
-  
+
+.about{
+  margin-top: 6vh; 
+}
 
 button{
   margin: 0.5%;
@@ -33,4 +35,9 @@ button{
 
 span{
   margin: 2vh; 
+}
+
+p{
+  padding: 0% 12% 2% 13%;
+  margin: 0% 8% 0% 8%;
 }
