@@ -7,14 +7,12 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  /* display: flex;
-  flex-direction: column; */
   color: white;
 }
 
 .cells{
   margin-left: 41vh;
-  margin-top: 10vh;
+  margin-top: 6vh;
 }
 
 .about{
@@ -29,5 +27,10 @@
 }
   
 
+button{
+  margin: 0.5%;
+}
 
-
+span{
+  margin: 2vh; 
+}

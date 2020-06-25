@@ -159,23 +159,24 @@ function Grid() {
             }}>Random
             </button>
 
-            <div className="speedBox">
+            <span className="speedBox">
+                <label htmlFor ="speed">Speed: </label>
                 <select name ="speeds" id ="speeds" onChange = {handleSpeed}>
                     <option value ="normal">Normal</option>
                     <option value = "fast">Fast</option>
                     <option value ="slow">Slow</option>
                 </select>
-            </div>
+            </span>
 
-            <div className ="patternsContainer">
-                <label htmlFor ="patterns">Patterns</label>
+            <span className ="patternsContainer">
+                <label htmlFor ="patterns">Patterns: </label>
                 <select name ="patterns" id ="patterns" onChange ={patternChange}>
                     <option value ="None">None</option>
                     <option value = "Accident">Accident</option>
                     <option value = "Penta">pentaDecathlon</option>
                     <option value = "Hi">Hi</option>
                 </select>
-            </div>
+            </span>
 
         <span>Number of Generations: {generations}</span>
 
