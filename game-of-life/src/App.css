@@ -12,7 +12,10 @@
   color: white;
 }
 
-
+.cells{
+  margin-left: 41vh;
+  margin-top: 10vh;
+}
 
 .about{
   margin-left: 23vh;
