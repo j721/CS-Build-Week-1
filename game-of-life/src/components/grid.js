@@ -47,7 +47,6 @@ const generateEmptyGrid = ()=>{
 function Grid() {
     //initial state for grid
     const [grid, setGrid] = useState(() => {
-        const gridRows = []; //rows set to an empty array
         return generateEmptyGrid(); 
     })
     console.log(grid)

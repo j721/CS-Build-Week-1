@@ -4,7 +4,6 @@
 }
 
 
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -27,12 +26,21 @@
 
 .about{
   margin-top: 6vh; 
-  margin-right: 4%; 
+  margin-right: 6%; 
 }
 
 button{
   margin: 0.5%;
 }
+
+/* h1{
+  font-size: 3.5em;
+  font-family: 'Pacifico';
+  color: #c145af;
+  text-shadow: 4px 4px 10px #494949;
+} */
+
+
 
 span{
   margin: 2vh; 
