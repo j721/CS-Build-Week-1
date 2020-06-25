@@ -76,7 +76,7 @@ function Grid() {
             return;
         }
 
-        //seGenerations to iterate over item and increment by count +1
+        //setGenerations to iterate over item and increment by count +1
         setGenerations((genCount)=>{
             return (genCount = genCount + 1)
         })
@@ -96,8 +96,6 @@ function Grid() {
                                 neighbors +=g[newI][newK] //add 1 to current live cell
                             }
                         })
-
-                        // let neighbors = countNeighborCells(g, i, k)
 
                         // grid copy will die according to rules
                         if(neighbors < 2 || neighbors > 3){
@@ -182,7 +180,7 @@ function Grid() {
 
 
         <div className="cells" style={{
-            display: 'grid',
+            display: 'grid',  
             gridTemplateColumns: `repeat(${numberOfCols}, 20px)`   //CSS grid styling 
         }}>
             {/*map through rows and cols to display grid  */}
