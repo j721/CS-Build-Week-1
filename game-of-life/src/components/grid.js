@@ -1,8 +1,12 @@
 import React, { useState, useCallback, useRef } from "react";
 import produce from 'immer';
+import {accidentPattern} from "../patterns/accident";
+import {hiPattern} from "../patterns/hi";
+import {pentaDecathlon}  from "../patterns/pentaDecathlon";
 
-const numberOfRows = 40;
-const numberOfCols = 60;
+
+const numberOfRows = 25;
+const numberOfCols = 45;
 
 const speeds ={
     slow: 700, 
@@ -10,8 +14,12 @@ const speeds ={
     fast: 50
 }
 
+const patternsContainer ={
+    Accident: accidentPattern,
+    Hi: hiPattern,
+    Penta: pentaDecathlon
+}
 
-//column doesn't change, but the row does
 //tells location of neighboring cells
 const operations =[
     [0, 1],
@@ -25,8 +33,7 @@ const operations =[
 ]
 
 const generateEmptyGrid = ()=>{
-    const gridRows = []; //rows set to an empty array
-
+    const gridRows = []; 
     //for loop where i=0 means cell is dead and i= 1 is alive
     //want to initialize an array of zeros. Have callback function return 0 
     for (let i = 0; i < numberOfRows; i++) {
@@ -38,13 +45,12 @@ const generateEmptyGrid = ()=>{
 }
 
 function Grid() {
-
     //initial state for grid
     const [grid, setGrid] = useState(() => {
         const gridRows = []; //rows set to an empty array
         return generateEmptyGrid(); 
     })
-    // console.log(grid)
+    console.log(grid)
     
     //initial state for speed
     const [speed, setSpeed] = useState("normal");
@@ -61,7 +67,7 @@ function Grid() {
     //initial state for running set to false to not run
     const [running, setRunning] = useState(false);
     //useRef hook creates an updated version of current running state
-    const runningRef = useRef();
+    const runningRef = useRef(); 
     runningRef.current = running
 
     //useCallback hook to not have to create this function more than once
@@ -90,6 +96,9 @@ function Grid() {
                                 neighbors +=g[newI][newK] //add 1 to current live cell
                             }
                         })
+
+                        // let neighbors = countNeighborCells(g, i, k)
+
                         // grid copy will die according to rules
                         if(neighbors < 2 || neighbors > 3){
                             gridCopy[i][k] = 0; 
@@ -103,6 +112,17 @@ function Grid() {
         })
         setTimeout(runSimulation, speeds[speedRef.current]) 
     },[])
+
+
+    const patternChange = (e)=>{
+        let patternName = e.target.value;
+
+        if(patternName === "None"){
+            setGrid(generateEmptyGrid());
+        }else{
+            setGrid(patternsContainer[patternName])
+        }
+    }
 
     const handleSpeed = e=>{
         setSpeed(e.target.value);
@@ -146,20 +166,19 @@ function Grid() {
                     <option value ="slow">Slow</option>
                 </select>
             </div>
-{/* 
-            <button onClick ={()=>{
-                // setSpeed(3)
-                setTimeout(runSimulation(), 1) //the rate  of generations is increasing
-            }}>Fast</button> */}
+
+            <div className ="patternsContainer">
+                <label htmlFor ="patterns">Patterns</label>
+                <select name ="patterns" id ="patterns" onChange ={patternChange}>
+                    <option value ="None">None</option>
+                    <option value = "Accident">Accident</option>
+                    <option value = "Penta">pentaDecathlon</option>
+                    <option value = "Hi">Hi</option>
+                </select>
+            </div>
 
         <span>Number of Generations: {generations}</span>
 
-        {/* <details>
-        <summary>Neat patterns</summary>
-        {patterns.map(pattern => (
-        <button key={pattern} onClick={() => setPattern(pattern)}>{pattern}</button>
-        ))}
-      </details> */}
 
         <div className="cells" style={{
             display: 'grid',
@@ -168,6 +187,7 @@ function Grid() {
             {/*map through rows and cols to display grid  */}
             {grid.map((rows, i) => rows.map((cols, j) =>
                 <div
+                key={`${i}-${j}`} //unique key defined with index of i(rows) and j (cols) for each individual cell 
                     onClick={() => {    //produce from immer library makes a change to grid state but maintains immutability, and creates a copy of grid
                         if(!running){  
                             //makes cells not clickable while running         
@@ -178,7 +198,6 @@ function Grid() {
                         }
                     }}
 
-                    key={`${i}-${j}`} //unique key defined with index of i(rows) and j (cols) for each individual cell 
                     style={{
                         width: 20,
                         height: 20, backgroundColor: grid[i][j] ? 'yellow' : undefined, //if alive yellow, else undefined
