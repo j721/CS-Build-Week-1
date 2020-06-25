@@ -1,12 +1,15 @@
 import React, { useState, useCallback, useRef } from "react";
-// import { useHistory } from "react-router-dom";
 import produce from 'immer';
-
-
-
 
 const numberOfRows = 40;
 const numberOfCols = 60;
+
+const speeds ={
+    slow: 700, 
+    normal: 150,
+    fast: 50
+}
+
 
 //column doesn't change, but the row does
 //tells location of neighboring cells
@@ -20,8 +23,6 @@ const operations =[
     [1, 0],
     [-1, 0],
 ]
-
-
 
 const generateEmptyGrid = ()=>{
     const gridRows = []; //rows set to an empty array
@@ -37,7 +38,6 @@ const generateEmptyGrid = ()=>{
 }
 
 function Grid() {
-    const [speed, setSpeed] = useState(0);
 
     //initial state for grid
     const [grid, setGrid] = useState(() => {
@@ -45,13 +45,16 @@ function Grid() {
         return generateEmptyGrid(); 
     })
     // console.log(grid)
+    
+    //initial state for speed
+    const [speed, setSpeed] = useState("normal");
 
-
+    const speedRef = useRef(speed);
+    speedRef.current = speed; 
 
     //initial state for generations
     const [generations, setGenerations] = useState(0);
-    
-    //generation useRef hook to update to current
+    //useRef hook to update to current
     const genRef = useRef();
     genRef.current = generations; 
     
@@ -61,9 +64,8 @@ function Grid() {
     const runningRef = useRef();
     runningRef.current = running
 
-    //useCallback hook to not have to create this function more than once    
-    //recursion 
-    const runSimulation =useCallback(()=>{
+    //useCallback hook to not have to create this function more than once
+    const runSimulation = useCallback(()=>{
         if (!runningRef.current){
             return;
         }
@@ -99,17 +101,17 @@ function Grid() {
                 }
             })
         })
-        setTimeout(runSimulation, 1500) //run again in 100 milliseconds
+        setTimeout(runSimulation, speeds[speedRef.current]) 
     },[])
 
-
+    const handleSpeed = e=>{
+        setSpeed(e.target.value);
+    }
 
     return (
-        <>
-        
-        
-        {/* button to toggle between start and stop state */}
-        <button onClick ={()=>{
+        <>      
+
+        <button className="StartStopToggle" onClick ={()=>{
             setRunning(!running);
             if(!running){
                 runningRef.current = true; 
@@ -119,7 +121,7 @@ function Grid() {
             {running ? 'stop': 'start'} 
             </button >
 
-        {/* Clear button */}
+     
             <button onClick ={()=>{
                 setGrid(generateEmptyGrid())
                 setGenerations(0)
@@ -127,8 +129,7 @@ function Grid() {
 
             </button>
 
-            {/* Random button */}
-            <button onClick ={()=>{
+            <button className = "random" onClick ={()=>{
                  const gridRows = []; 
                  for (let i = 0; i < numberOfRows; i++) {                           
                      gridRows.push(Array.from(Array(numberOfCols), () => (Math.random() > 0.7 ? 1: 0)))
@@ -136,26 +137,37 @@ function Grid() {
                  }        
                  setGrid(gridRows); //initial state of setGrid now updated with gridRows array after it has pushed (added new item to end of array)  the updated values from the random number of columns
             }}>Random
-
             </button>
 
+            <div className="speedBox">
+                <select name ="speeds" id ="speeds" onChange = {handleSpeed}>
+                    <option value ="normal">Normal</option>
+                    <option value = "fast">Fast</option>
+                    <option value ="slow">Slow</option>
+                </select>
+            </div>
+{/* 
             <button onClick ={()=>{
                 // setSpeed(3)
                 setTimeout(runSimulation(), 1) //the rate  of generations is increasing
-            }}>Fast</button>
-        
-
+            }}>Fast</button> */}
 
         <span>Number of Generations: {generations}</span>
 
-        <div style={{
+        {/* <details>
+        <summary>Neat patterns</summary>
+        {patterns.map(pattern => (
+        <button key={pattern} onClick={() => setPattern(pattern)}>{pattern}</button>
+        ))}
+      </details> */}
+
+        <div className="cells" style={{
             display: 'grid',
             gridTemplateColumns: `repeat(${numberOfCols}, 20px)`   //CSS grid styling 
         }}>
             {/*map through rows and cols to display grid  */}
             {grid.map((rows, i) => rows.map((cols, j) =>
                 <div
-
                     onClick={() => {    //produce from immer library makes a change to grid state but maintains immutability, and creates a copy of grid
                         if(!running){  
                             //makes cells not clickable while running         

@@ -2,13 +2,15 @@ import React from 'react';
 import { Route, Router } from "react-router-dom";
 import './App.css';
 import Grid from "./components/grid";
-import Home from "./components/home"
+// import Select from "./components/select";
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>Welcome to Conway's Game of Life</h1>
+        {/* <Select/> */}
         <Grid />
       </header>
       <div className="container">
