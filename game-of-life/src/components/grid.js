@@ -125,6 +125,8 @@ function Grid() {
         setSpeed(e.target.value);
     }
 
+ 
+
     return (
         <>      
 
@@ -178,14 +180,18 @@ function Grid() {
         <span>Number of Generations: {generations}</span>
 
 
-        <div className="cells" style={{
+        <div className="cells" 
+        
+            style={{
             display: 'grid',  
             gridTemplateColumns: `repeat(${numberOfCols}, 20px)`   //CSS grid styling 
         }}>
+
             {/*map through rows and cols to display grid  */}
             {grid.map((rows, i) => rows.map((cols, j) =>
                 <div
-                key={`${i}-${j}`} //unique key defined with index of i(rows) and j (cols) for each individual cell 
+                    key={`${i}-${j}`} //unique key defined with index of i(rows) and j (cols) for each individual cell 
+                    
                     onClick={() => {    //produce from immer library makes a change to grid state but maintains immutability, and creates a copy of grid
                         if(!running){  
                             //makes cells not clickable while running         
@@ -198,8 +204,8 @@ function Grid() {
 
                     style={{
                         width: 20,
-                        height: 20, backgroundColor: grid[i][j] ? 'yellow' : undefined, //if alive yellow, else undefined
-                        border: 'solid 1px black'
+                        height: 20, backgroundColor: grid[i][j] ? '#f0bae3' : undefined, //if alive yellow, else undefined
+                        border: ' 1px solid #5c5c5c'
                     }}>
                 </div>))}
         </div>

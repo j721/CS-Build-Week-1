@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
 import Grid from "./components/grid";
-
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 
 function App() {
+  const [open, setOpen] = React.useState(false)
   return (
     <div className="App">
       <header className="App-header">
@@ -12,9 +14,11 @@ function App() {
       
         <Grid />
       </header>
+      {/* <button className="Modal" onClick={()=>setOpen(true)}>Learn More about the Game</button>
+      <Modal open={open} onClose={() => setOpen(false)} center> */}
       <div className="container">
         <div className ="about">
-          <h1>Conway's Game of Life Algorithm</h1>
+          <h2>Conway's Game of Life Algorithm</h2>
           <p>The game is based on cellular automaton,a grid of cells that can either have the state of being dead or alive.</p>
         </div>
         <div className ="rules">
@@ -27,6 +31,7 @@ function App() {
       </p>
         </div>
       </div>
+      {/* </Modal> */}
     </div>
   );
 }
