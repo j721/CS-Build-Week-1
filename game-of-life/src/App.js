@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Grid from "./components/grid";
-import 'react-responsive-modal/styles.css';
-import { Modal } from 'react-responsive-modal';
+// import 'react-responsive-modal/styles.css';
+// import { Modal } from 'react-responsive-modal';
 
 
 function App() {
-  const [open, setOpen] = React.useState(false)
+  // const [open, setOpen] = React.useState(false)
   return (
     <div className="App">
       <header className="App-header">

@@ -170,7 +170,7 @@ function Grid() {
             <span className ="patternsContainer">
                 <label htmlFor ="patterns">Patterns: </label>
                 <select name ="patterns" id ="patterns" onChange ={patternChange}>
-                    <option value ="None">None</option>
+                    <option className="dropdown-item" value ="None">None</option>
                     <option value = "Accident">Accident</option>
                     <option value = "Penta">pentaDecathlon</option>
                     <option value = "Hi">Hi</option>
