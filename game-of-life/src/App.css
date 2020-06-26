@@ -82,3 +82,16 @@ p{
 body{
   font-family: 'Oxygen Mono', monospace;
 }
+
+select{
+  border-radius: 0.3rem;
+  padding: 0.6% 0.3%;
+  color: #131417;
+  background-color: #f0bae3;
+  font-family: 'Oxygen Mono', monospace;
+}
+
+option{
+  background-color: #f0bae3;
+  font-family: 'Oxygen Mono', monospace;
+}
