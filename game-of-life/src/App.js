@@ -1,12 +1,17 @@
 import React from 'react';
 import './App.css';
 import Grid from "./components/grid";
+// import Collapse from 'react-bootstrap/Collapse';
+// import Fade from 'react-bootstrap/Fade';
+// import Button from 'react-bootstrap/Button';
+
 // import 'react-responsive-modal/styles.css';
 // import { Modal } from 'react-responsive-modal';
 
 
 function App() {
   // const [open, setOpen] = React.useState(false)
+  // const [open, setOpen] = useState(false);
   return (
     <div className="App">
       <header className="App-header">
@@ -14,8 +19,16 @@ function App() {
       
         <Grid />
       </header>
+      {/* <Button
+        onClick={() => setOpen(!open)}
+        aria-controls="example-fade-text"
+        aria-expanded={open}
+      >
+        Learn More About the Game
+      </Button> */}
       {/* <button className="Modal" onClick={()=>setOpen(true)}>Learn More about the Game</button>
       <Modal open={open} onClose={() => setOpen(false)} center> */}
+            {/* <Collapse in={open}> */}
       <div className="container">
         <div className ="about">
           <h2>Conway's Game of Life Algorithm</h2>
@@ -31,6 +44,7 @@ function App() {
       </p>
         </div>
       </div>
+      {/* </Collapse> */}
       {/* </Modal> */}
     </div>
   );
